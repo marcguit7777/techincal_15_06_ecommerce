@@ -1,4 +1,4 @@
-import React, {useRef, useContext, useEffect, useState} from 'react'
+import React, {useRef, useContext, useEffect} from 'react'
 import { PageTag, StyledLinkNewProduct } from './PaginationButtons.styled'
 import EcommerceProducts from 'context/EcommerceProducts'
 
@@ -15,6 +15,11 @@ const PaginationButtons = ({ totalProducts, productsPerPage, currentPage, setCur
   const getProductsInPage = selectedPage => setCurrentPage(selectedPage)
   const increasePagination = () => currentPage < arrayWithNumberOfButtons.length && setCurrentPage(currentPage + 1)
   const decreasePagination = () => currentPage > 1 && setCurrentPage(currentPage - 1)
+
+
+  useEffect(() => {
+    setNavbarHeight(navRef.current?.scrollHeight)
+  },[])
 
   function handleWindowResize() {
     setNavbarHeight(navRef.current?.scrollHeight);

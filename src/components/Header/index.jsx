@@ -16,7 +16,6 @@ const Header = ({ productKeys, currentProducts }) => {
       )
       setCurrentProducts(sorted)
       setOrder('DES')
-      console.log(sorted);
     }
     else {
       const sorted = [...currentProducts].sort((a, b) =>
@@ -26,8 +25,6 @@ const Header = ({ productKeys, currentProducts }) => {
 
       setOrder('ASC')
     }
-
-    // return 'currentProducts[column].sort()'
   }
 
   return (
