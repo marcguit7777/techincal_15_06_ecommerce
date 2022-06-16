@@ -5,6 +5,8 @@ import EcommerceProducts from 'context/EcommerceProducts'
 
 const Header = ({ productKeys, currentProducts }) => {
 
+  console.log([...currentProducts]);
+
   const [order, setOrder] = useState('ASC')
 
   const { setCurrentProducts, navbarHeight } = useContext(EcommerceProducts)
@@ -12,17 +14,16 @@ const Header = ({ productKeys, currentProducts }) => {
   const sortingProductsBy = column => {
     if (order === 'ASC') {
       const sorted = [...currentProducts].sort((a, b) =>
-        a[column].toLowerCase() > b[column].toLowerCase() ? 1 : -1
+        a[column] > b[column] ? 1 : -1
       )
       setCurrentProducts(sorted)
       setOrder('DES')
     }
     else {
       const sorted = [...currentProducts].sort((a, b) =>
-        a[column].toLowerCase() < b[column].toLowerCase() ? 1 : -1
+        a[column] < b[column] ? 1 : -1
       )
       setCurrentProducts(sorted)
-
       setOrder('ASC')
     }
   }

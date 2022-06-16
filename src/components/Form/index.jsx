@@ -20,6 +20,10 @@ const Form = () => {
    const categoryInput = useRef()
    const priceInput = useRef()
   
+   // en el caso que el formulario estuviera en la misma página que la tabla,
+   // al hacer el submit añadiría el nuevo producto a "products" de forma manual
+   // para ver los resultados al momento. También establecería la paginación 
+   // a la última página
    // const { products, setProducts } = useContext(EcommerceProducts)
 
    const inputHandler = (e) => {
@@ -66,7 +70,10 @@ const Form = () => {
                alert('Product properly added')
                // setProducts({ ...products, request })
             })
-            .catch(err => console.log('Data not created, error: ', err))
+            .catch(err => {
+               alert('Something went wrong, check the inspector')
+               console.log('Data not created, error: ', err)
+            })
       }
   };
       
