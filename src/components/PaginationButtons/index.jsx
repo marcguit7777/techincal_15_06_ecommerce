@@ -16,9 +16,9 @@ const PaginationButtons = ({ totalProducts, productsPerPage, currentPage, setCur
   const increasePagination = () => currentPage < arrayWithNumberOfButtons.length && setCurrentPage(currentPage + 1)
   const decreasePagination = () => currentPage > 1 && setCurrentPage(currentPage - 1)
 
-
   useEffect(() => {
     setNavbarHeight(navRef.current?.scrollHeight)
+  // eslint-disable-next-line
   },[])
 
   function handleWindowResize() {

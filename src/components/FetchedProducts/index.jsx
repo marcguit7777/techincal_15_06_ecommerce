@@ -12,13 +12,14 @@ const PRODUCTS_PER_PAGE = 10
 
 const FetchedProducts = () => {
 
-  const [productKeys, setProductKeys] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [isLoading, setIsLoading] = useState(true)
 
-  const {products, setProducts, currentProducts, setCurrentProducts} = useContext(EcommerceProducts)
+  const {products, setProducts, currentProducts, setCurrentProducts, productKeys, setProductKeys} = useContext(EcommerceProducts)
 
   const fetchProducts = async () => {
+    setIsLoading(true)
+
     await axios.get(URL_FAKE_API)
       .then(res => {
         const fetchedProducts = res.data
@@ -26,24 +27,23 @@ const FetchedProducts = () => {
         const arrayProductKeys = Object.keys(fetchedProducts[0])
         arrayProductKeys.shift()
         setProductKeys(arrayProductKeys);
-        setIsLoading(false)
       })
       .catch(err => 
-        console.log('Api error', err)
-      )
+        console.log('Api error', err))
+      .finally(setIsLoading(false))
   }
 
-  //no sé quitar el warning de "has missing dependency"
   useEffect(() => {
-    fetchProducts();
+    fetchProducts()
+  // eslint-disable-next-line
   }, [])
 
   const indexLastProductPaginated = currentPage * PRODUCTS_PER_PAGE;
   const indexFirstProductPaginated = indexLastProductPaginated - PRODUCTS_PER_PAGE;
 
-  //no sé quitar el warning de "has missing dependency"
   useEffect(() => {
     setCurrentProducts(products.slice(indexFirstProductPaginated, indexLastProductPaginated))
+   // eslint-disable-next-line
   }, [products, currentPage])
 
   return (
@@ -61,7 +61,9 @@ const FetchedProducts = () => {
           <Products
             currentProducts={currentProducts}
             setProducts={setProducts}
-            productKeys={productKeys} />
+            productKeys={productKeys}
+            isPositionFix={true} 
+          />
         </div>
         }
     </div>

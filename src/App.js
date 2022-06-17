@@ -12,7 +12,6 @@ function App() {
           <Routes>
             <Route exact path='/' element={<FetchedProducts />} />
             <Route exact path='/form' element={<Form />} />
-            
           </Routes>
         </Router>
       </EcommerceProductsProvider>
